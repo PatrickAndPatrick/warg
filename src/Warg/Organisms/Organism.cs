@@ -13,7 +13,7 @@ namespace Warg.Organisms
 		protected Color Color { get; set; }
 
 		public int Radius { get; protected set; }
-		public Vector2 Postion { get; protected set; }
+		public Vector2 Position { get; protected set; }
 		public Vector2 Velocity { get; protected set; }
 
 		public Vector2 MostImportantOrganismDirection { get; set; }
@@ -50,7 +50,7 @@ namespace Warg.Organisms
 			Texture = texture;
 			Color = color;
 			Radius = radius;
-			Postion = startingPosition;
+			Position = startingPosition;
 			Velocity = velocity;
 
 			MyType = organismType;
@@ -63,12 +63,12 @@ namespace Warg.Organisms
 
 		public void Update(GameTime gameTime)
 		{
-			Postion += Velocity;
+			Position += Velocity;
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(Texture, new Rectangle((int)Postion.X, (int)Postion.Y, Radius, Radius), Color);
+			spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, Radius, Radius), Color);
 		}
 
 		//Behavior Methods
