@@ -19,6 +19,14 @@ namespace Warg
 			foreach (var organism1 in _organisms)
 			{
 				organism1.Update(gameTime);
+
+				foreach (var organism2 in _organisms)
+				{
+					if (organism1 != organism2 && organism1.IsCollidingWith(organism2))
+					{
+						organism1.CollideWithOrganism(organism2);
+					}
+				}
 			}	
 		}
 

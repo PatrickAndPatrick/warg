@@ -6,7 +6,7 @@ using Warg.Organisms.Behavior;
 
 namespace Warg.Organisms
 {
-	public class Organism
+	public class Organism : ICircleCollider
 	{
 
 		protected Texture2D Texture { get; set; }
@@ -15,6 +15,7 @@ namespace Warg.Organisms
 		public int Radius { get; protected set; }
 		public Vector2 Position { get; protected set; }
 		public Vector2 Velocity { get; protected set; }
+		public Vector2 Center { get { return new Vector2(Position.X + (Radius), Position.Y +(Radius)); } }
 
 		public Vector2 MostImportantOrganismDirection { get; set; }
 		public Reaction MostImportantOrganismTypeReaction { get; set; }
@@ -26,6 +27,8 @@ namespace Warg.Organisms
 		public float ReproductionThreshold { get; set; }
 		public OrganismType MyType { get; set; }
 		public Dictionary<Organism.OrganismType, Reaction> ReactionDictionary { get; set; }
+
+		private bool _isColliding; //Temporary!
 
 		public enum OrganismType
 		{
@@ -64,11 +67,14 @@ namespace Warg.Organisms
 		public void Update(GameTime gameTime)
 		{
 			Position += Velocity;
+
+			_isColliding = false;
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, Radius*2, Radius*2), Color);
+			var color = _isColliding ? Color.Red : Color;
+			spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, Radius*2, Radius*2), color);
 		}
 
 		//Behavior Methods
@@ -103,6 +109,11 @@ namespace Warg.Organisms
 		private void Consume() //called when organism is in direct contact with 'something it can consume'
 		{
 	        
+		}
+
+		public void CollideWithOrganism(Organism organism2)
+		{
+			_isColliding = true;
 		}
 	}
 }
