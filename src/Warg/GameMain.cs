@@ -14,7 +14,7 @@ namespace Warg
 		SpriteBatch _spriteBatch;
 
 		private OrganismGenerator _organismGenerator;
-		private List<Organism> _organisms;
+		private World _world;
 		private Camera _camera;
 		private InputManager _input;
 		private Vector2 _worldSize;
@@ -28,7 +28,6 @@ namespace Warg
 		protected override void Initialize()
 		{
 			_worldSize = new Vector2(800, 800);
-			_organisms = new List<Organism>();
 
 			_camera = new Camera(_worldSize, 
 				new Vector2(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight));
@@ -45,10 +44,14 @@ namespace Warg
 			var circle = Content.Load<Texture2D>("Circle.png");
 			_organismGenerator = new OrganismGenerator(circle);
 
+			var organisms = new List<Organism>();
+
 			for (var i = 0; i < 500; i++)
 			{
-				_organisms.Add(_organismGenerator.CreateOrganism());
+				organisms.Add(_organismGenerator.CreateOrganism());
 			}
+
+			_world = new World(organisms);
 		}
 
 		protected override void UnloadContent()
@@ -63,7 +66,7 @@ namespace Warg
 
 			_input.Update(gameTime, Keyboard.GetState());
 
-			_organisms.ForEach(x => x.Update(gameTime));
+			_world.Update(gameTime);
 
 			_camera.Update(gameTime);
 
@@ -79,7 +82,7 @@ namespace Warg
 				,SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone,
 				null, _camera.Transform);
 
-			_organisms.ForEach(x => x.Draw(_spriteBatch));
+			_world.Draw(_spriteBatch);
 
 			_spriteBatch.End();
 
