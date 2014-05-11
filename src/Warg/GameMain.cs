@@ -46,7 +46,7 @@ namespace Warg
 
 			var organisms = new List<Organism>();
 
-			for (var i = 0; i < 500; i++)
+			for (var i = 0; i < 200; i++)
 			{
 				organisms.Add(_organismGenerator.CreateOrganism());
 			}
