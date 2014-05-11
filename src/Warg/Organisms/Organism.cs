@@ -68,7 +68,7 @@ namespace Warg.Organisms
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, Radius, Radius), Color);
+			spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, Radius*2, Radius*2), Color);
 		}
 
 		//Behavior Methods

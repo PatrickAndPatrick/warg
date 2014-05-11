@@ -22,7 +22,7 @@ namespace Warg.Organisms
 			var xVelocity = Rando.Next(-50, 50) * 0.05f;
 			var yVelocity = Rando.Next(-50, 50) * 0.05f;
 
-			var organism = new Organism(OrganismTexture, GetOrganismColor(), 25, new Vector2(350, 200),
+			var organism = new Organism(OrganismTexture, GetOrganismColor(), 10, new Vector2(350, 200),
 				new Vector2(xVelocity, yVelocity), Organism.OrganismType.DEER, 20f, 100f, 40f,
 				new Dictionary<Organism.OrganismType, Reaction>());
 
